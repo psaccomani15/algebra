@@ -1,0 +1,246 @@
+\documentclass[../main]{subfiles}
+
+\begin{document}
+\newcommand{\stmat}[3]{\begin{pmatrix} 
+    1 & 2 & 3 \\
+    #1 & #2 & #3 \end{pmatrix}}
+\subsection{Definições e Propriedades}
+Daremos uma definição inicial em termos de objetos já trabalhados:
+\begin{definition}
+    Um grupo é um grupóide com um único objeto.
+\end{definition}
+
+Isto é, um grupóide com um único objeto é uma categoria na qual, denominando por
+\(\varphi\) esse único objeto, então \(\text{Aut}_\cat(\varphi)\) carrega toda
+informação sobre ela. Denominamos assim um grupo \(G = Aut_\cat(\varphi)\).
+Assim, diretamente, vemos que pela definição de categoria temos a existência de
+uma identidade, sobre uma operação associativa (i.e morfismos), além disso como
+todo morfismo é iso, temos também a existência da inversa.
+
+Dada essa prévia discussão, em termos usuais, podemos pensar em um grupo como um
+conjunto munido de uma operação obedecendo certos axiomas, isto é:
+\begin{definition}[Grupo]
+    Seja \(G\) um conjunto não vazio, munido de uma operação binária \(\cdot: G
+    \times G \to G\) denotado pela tupla \((G, \cdot)\), então \(G\) é um grupo
+    caso:
+    \begin{itemize}
+        \item A operação \(\cdot\) é associativa, ou seja:
+        \[
+            \forall g, h, k \in G, (g \cdot h) \cdot k = g \cdot (h \cdot k)
+        \]
+        \item Existência da identidade \(e_G\) para a operação:
+        \[\exists e_G \in G \forall g \in G, g \cdot e_g = e_g \cdot g = g\]
+        \item Existência da inversa:
+        \[\forall g \in G, \exists h \in G, hg = gh = e_G\]
+    \end{itemize}
+\end{definition} 
+
+\begin{exercise}
+    Mostre que as duas definições são de fato equivalentes, isto é mostre que
+    todo grupo pode ser escrito como o grupo de automorfismos de algum objeto em
+    uma categoria.
+\end{exercise}
+\begin{answer}
+    Seja \(G\) um grupo. Construímos a categoria \(\cat\) da seguinte forma:
+    Tome \(\Obj(\cat) = e_G\). e considere 
+\end{answer}
+Com essas diferentes visões sobre um grupo dadas, podemos começar a tentar obter
+propriedades interessantes sobre essas estruturas, assim:
+\begin{prop}
+    A identidade é única. Isto é, se \(h \in G\) é uma identidade, então \(h =
+    e_G\) assim concluímos que todo grupo possuí ao menos um elemento especial
+    bem definido.
+\end{prop}
+\begin{proof}
+    Por inspeção:
+    \[h = e_G h = e_g\]
+\end{proof}
+
+\begin{prop}
+    Elementos inversos também são únicos.
+\end{prop}
+\begin{proof}
+    Tome \(g \in G\) e \(h_1, h_2 \in G\) inversos de \(g\), novamente, por
+    inspeção:
+    \[h_1 = e_G h_1 = h_2(h_1 g) = h_2\]
+\end{proof}
+\begin{prop}
+    Seja \((G, \cdot)\) um grupo. Então \(\forall a, g, h \in G\) \(ga = ha
+    \implies g = h, ag = ah \implies g = h\). 
+\end{prop}
+\begin{proof}
+    Novamente, por inspeção:
+    \[ga = ha \implies (ga)a^{-1} = (ha)a^{-1} \implies g = h\]. Da mesma forma,
+    concluímos o mesmo para o outro fato.
+\end{proof}
+
+\subsubsection*{Grupos comutativos}
+
+Até agora em nenhum momento exigimos que elementos de um grupo comutem sobre a
+operação, nem sequer definimos o significado de "comutar", entretanto grupos
+comutativos são de extrema importância matemática. Assim:
+\begin{definition}
+    Dizemos que um grupo é comutativo (ou abeliano) se:
+    \[\forall g, h \in G, gh = hg\]    
+\end{definition}
+
+Quando um grupo é abeliano, mudamos nossa terminologia. Usualmente se trata a
+operação conforme uma adição, denotando a identidade como \(0_G\), \(\cdot\)
+como \(+\) e a inversa de \(a\) por \(-a\).
+
+\subsection*{Ordem}
+\begin{definition}
+    Um elemento \(g \in G\) possuí ordem finita se \(g^n = e\) para algum n
+    inteiro positivo. Nesse caso, a ordem \(|g|\) é o menor inteiro \(n\) tal
+    qual isso é observado.
+\end{definition}
+
+Dessa definição abstraímos diretamente:
+\begin{lemma}
+    Se \(g^n = e\) para algum n inteiro, então \(|g|\) divide \(n\). 
+\end{lemma}
+\begin{lemma}
+  Temos que \(g^n = e\), para \(m = |g|\), \(g^m = e\) tal qual \((g^m)^p = e,
+  \forall p \in \mathbb Z^+\) com necessariamente \((g^m)^q = (g^n)\) para algum
+  \(q\), já que caso contrário, podemos verificar \(m\) não seria o menor
+  inteiro assim diretamente \(n = m * q\), portanto \(m \text{divide } n \iff
+  |g| \text{divide } n\). 
+\end{lemma}
+
+\begin{definition}
+    Se G enquanto conjunto é finito, então a ordem \(|G|\) de \(G\) é sua
+    cardinalidade, caso \(G\) é infinito, então \(|G| = \infty\)
+\end{definition}
+
+Dessa definição podemos concluir que \(|g| \leq |G|, \forall g \in G\), já que
+no caso finito (infinito é vacuosamente verdadeiro) para todo \(g \in G\), se
+\(n = |G|\) então \((g^0, ..., g^n)\) não podem ser todos distintos como
+consequência direta dessa finitude, então, \(\exists i, j: 0 \leq i < j \leq
+|G|\), assim \(g^i = g^j \implies g^{j - i} = e\). Dessa forma \(|g| \leq (j -
+i) \leq |G|\). 
+
+Desse fato, concluímos também que se \(g\) possuí ordem finita, então \(g^m,
+\forall m \geq 0\) também e:
+\[ |g^m| = \frac{\text{lcm}(m, |g|)}{m} = \frac{|g|}{\gcd(m, |g|)}\]
+
+Tal conclusão segue do fato que inicalmente \(\text{lcm}(a, b) =
+ab/\gcd(a, b), \forall a, b\). Assim é necessário mostrar que \(|g^m| =
+\frac{\text{m, |g|}}{m}\). Assim, tome \(d\) tal qual \(g^{md} = e\), ou seja d
+tal qual \(md = \alpha |g|\), dessa forma por essa definição \(m|g^m|\) é o
+menor multiplo de m e de \(|g|\) assim, \(m|g^m| = \text{lcm}(m, |g|)\),
+concluindo o nosso objetivo.
+
+Em geral, para elementos comutativos, \(gh = hg \implies |gh| \text{ divide
+lcm}(|g|, |h|)\). O que pode ser demonstrado tomando \(|g| = m, |h| = n\) tal
+qual se \(N\) é múltiplo comum de \(m, n\) então \(g^N = h^N = e\)
+
+\subsection{Exemplos de Grupos}
+\begin{definition}[Grupos Simétricos]
+    Seja \(A\) um conjunto. O grupo simétrico, ou grupo de permutações  de \(A\)
+    é o grupo \(\text{Aut}_{\mathfrak{Set}}(A)\). O grupo de permutações do
+    conjunto \(\{1, ..., n\}\) é denotado por \(S_n\)
+\end{definition}
+
+Essa ideia de permutação pode ser observada mais claramente, ao observar o
+comportamento desse conjunto de automorfismos. Inicialmente fixamos um conjunto
+\(A\), temos então que como \(\cat = \mathfrak{Set}\), \(\text{Aut}(A)\) são
+simplesmente as bijeções de \(A\) para \(A\), ou seja, suas permutações, cuja
+simetria está ligado a uma apenas "reordenação" do conjunto preservando sua
+propriedades. 
+
+Nessa definição, algo que deixou-se de lado a forma em que pensamos no produto
+\(\cdot\). Na visão categorial, a definição direta advém da composição de
+morfismos, isto é defimos:
+\[f \cdot g := \forall p \in A, g \circ f(p) = g(f(p)).\]
+
+Um jeito de pensar nos elementos dos grupos \(S_n\), é utilizando a notação por
+matrizes \(2 \times n\) com \(f \in Aut_{\mathfrak{Set}}(A)\):
+\[a_{ij} = \begin{cases} i = 1, a_{ij} = j i = 2, a_{ij} = f(j) \end{cases}\]
+
+De forma auxiliar a visualização. Podemos pensar também no produto como
+\(\forall p \in A, fp = (p)fp\), nessa notação também sendo facilitado. 
+
+Dando atenção em específico a \(S_3\) vemos que enquanto conjunto ele é dado
+por:
+\begin{align*}
+    \left \{ \stmat{1}{2}{3}, \stmat{2}{1}{3}, \stmat 321 \stmat 132 \stmat 312 \stmat 231 \right \}
+\end{align*}
+\begin{exercise}
+    Mostre que para \(n \geq 3, S_n\) não é comutativo.
+\end{exercise}
+
+\begin{definition}[Grupos diedrais]
+    Grupos surgem naturalmente no contexto de simetrias, imediatamente a partir
+    da definição. Isto é, formalmente, pensamos em simetrias como transformações
+    que preservam certas propriedades de um objeto matemático, isto é,
+    automorfismos de dado objeto de uma categoria. 
+    
+    Assim, no contexto de figuras geométricas (planas) surge o conceito de
+    grupos diedrais, tal qual definimos grupos diedrais como o conjunto de todas
+    transformações espaciais que ocasionam em simetriais (movimentos rigidos). 
+
+    Assim, para um polígono regular de \(n\) lados centrado na origem, seu grupo
+    simétrico é composto por n rotações de \(\frac{2\pi}{n}\) ao longo da origem
+    e \(n\) reflexões dadas por seus eixos de simetria. Dessa forma denominamos
+    o grupo de simetrias associadas a um polígono regular de \(n\) lados como
+    \(D_{2n}\).
+\end{definition}
+
+É interessante ver que, dessa definição, concluímos diretamente que há uma
+relação entre grupos diedrais e simétricos, isto é, mais especificamente, existe
+uma função \(f: D_{2n} \to S_n\), injetiva (confira!),  basta ver que \(D_{2n}\)
+pode ser caracterizado enumerando cada vertice e suas transformações simétricas,
+que devem ser um subconjunto das permutações possíveis. Mais adiante trataremos
+tais casos com mais rigor e generalizações.
+
+\begin{definition}[Grupos Cíclicos]
+    Iniciamos esse caso, tomando a seguinte relação de equivalência:
+    \[(\forall a, b \in \mathbb Z): a \equiv b \mod n \iff n | (b - a)\]
+    Denominada congruência módulo \(n\), denotada por \(\modset{n}\) É evidente
+    que \(\modset{n}\) possuí \(n\) elementos (restos possíveis para essa
+    divisão):
+    \[[0]_n, [1]_n, ..., [n - 1]_n\]
+
+    Definimos assim, a relação binária nesse conjunto \(+: \modset n \times
+    \modset n \to \modset n, \forall a, b \in \mathbb Z, [a] + [b] := [a + b]\),
+    de modo a obter um grupo a partir dessa estruturas (verifique!).
+    
+    É evidente ainda, como essa operação herda propriedades de \(\mathbb Z\),
+    esse grupo é abeliano.
+
+    Grupos cíclicos terão maior enfase posteriormente, mas sua importância deve
+    ser claramente notada, por sua estrutura cíclica e modular. 
+\end{definition}
+
+\begin{prop}
+    Todo grupo cíclico definido da forma dada anteriormente é gerado por \([1]_n
+    \in \modset n\).
+\end{prop}
+\begin{proof}
+    É fácil ver que \(|[1]_n| = n\), assim como tal grupo possuí \(n\)
+    elementos, e como todo \(m [1]_n, 0 \leq m < n, m \in \mathbb Z\) são
+    distintos dois a dois, \([1]_n\) gera esse grupo.
+\end{proof}
+\begin{prop}
+    Da proposição anterior, vemos que a ordem de qualquer \([m]_n \in \modset
+    n\) é \(1, n | m\) e caso contrário:
+    \[|[m]_n| = \frac{n}{\gcd(m, n)}\]
+\end{prop}
+
+Essa última proposição nos revela uma propriedade ainda mais importante desses
+grupos:
+\begin{corol}
+    A classe \([m]_n\) gera \(\modset n\) se só se \(\gcd(m, n) = 1\)   
+\end{corol}
+
+Esse fato se torna ainda mais relevante, quando consideramos o caso em que \(n =
+p\) tal qual \(p\) é primo, já que toda classe de equivalência não nula geraria
+esse grupo.
+
+Temos ainda que, tomando \((\modset n)^* := \{[m]_n \in \modset n |
+\gcd(m, n) = 1\}\) munido da operação de multiplicação \([a]_n, [b]_n \in
+(\modset n)^*, [a]_n \cdot [b]_n = [a \cdot b]_n\) é um grupo. 
+
+Esse fato pode ser observado já que \(\gcd(m_1, n) = \gcd(m_2, n) = 1 \implies \gcd(m_1m_2, n) = 1\) (operação bem definida), cuja associatividade e identidade são resultados da multiplicação nos inteiros. Agora para observar a existência da inversa, vemos que como todo elemento desse grupo gera o grupo aditivo \(\modset n\), então:
+\(\exists a \in \mathbb Z, a \cdot [m]_n = [1]_n\)
+\end{document}

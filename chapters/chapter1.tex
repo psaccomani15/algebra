@@ -1,0 +1,558 @@
+\documentclass[../main]{subfiles}
+
+\begin{document}
+\subsection{Princípios de Teoria de Conjuntos}
+Antes de iniciar a discussão, é interessante tratar algumas definições básicas e
+iniciais, assim temos:
+
+\begin{definition}[Relação de Equivalência]
+    Uma relação de equivalência sobre um conjunto \(S\) é uma relação \(~\) que
+    obedece as seguintes propriedades:
+
+    \begin{itemize}
+        \item Reflexividade: \((\forall a \in S) a \sim a\).
+        \item Simetria: \((\forall a \in S) (\forall b \in S) a \sim b \implies
+        b \sim a\)
+        \item Transitividade: \((\forall a, b, c \in S)(a \sim b \text{ and } b
+        \sim c) \implies a \sim c\)
+\end{itemize}
+\end{definition}
+Dessa definição surge a possibilidade de se obter uma partição de \(S\). Assim,
+se \(\forall a \in S \) a classe de equivalência de \(a\) é definida como:
+
+\[[a]_\sim := \{b \in S | b \sim a\} \]
+
+\begin{exercise} 
+    Mostre que as classes de equivalência formam uma partição \(\mathcal P_\sim
+    \) de \(S\)
+\end{exercise}
+\begin{answer}
+    Para demonstrar esse item queremos mostrar que cada conjunto da classe
+    \(\mathcal P_\sim \) são disjuntos dois a dois, e \(\bigcup \mathcal P =
+    S\).
+    
+    Dessa forma, tomando \(A, B \in \mathcal P_\sim \), tal qual \(A \cap B \neq
+    \emptyset \), temos \(\exists x \in A \cap B\) tal qual, \(\forall y \in A,
+    x ~ y \implies y \in B \implies A \subset B\) e \(\forall \overline y \in B,
+    x ~ \overline y \implies \overline y \in A \implies B \subset A \therefore A
+    = B\). Assim, de fato, todo conjunto nessa classe deve ser disjunto entre
+    sí. 
+    
+    É evidente que \(\bigcup \mathcal P = S\), diretamente da definição de
+    classes de equivalência. 
+\end{answer}
+\begin{exercise}
+    Mostre que cada partição \(\mathcal P\) possuí uma relação de equivalência
+    correspondente, concluindo assim, que as noções de partição e relação de
+    equivalência são as mesmas.
+\end{exercise}
+
+A partir dessa ideia de que a classe de conjuntos formada pelas classes de
+equivalência de \(S\) formam uma partição, podemos partir para a ideia de
+operação de quociente em um conjunto:
+
+\begin{definition}[Quociente]
+    Seja \(S\) um conjunto, então seu quociente em respeito a relação de
+    equivalência \(\sim \) é o conjunto:
+    \[S/\sim := \mathcal P_\sim \]
+\end{definition}
+\begin{example}
+    Seja \(S = \mathbb Z\) e \(\sim \) definida por:
+    \[a \sim b \iff a - b \text{ é par.}\]
+
+    Então \(\mathbb Z/\sim \) consiste das duas classes de equivalência,
+    nominalmente:
+    \[\mathbb Z/\sim = \{[0]_\sim, [1]_\sim\}.\]
+
+    Que em linhas gerais, "separa" os inteiros em pares e ímpares (motivação
+    para aritmética modular).
+\end{example}
+
+    Uma forma de se pensar sobre a operação de quociente, é que neste novo
+    conjunto, a relação de equivalência se torna uma igualdade nesse conjunto.
+
+\subsection{Funções entre conjuntos}
+
+Além dos exemplos já conhecidos e tratados, temos também algumas "novas" noções,
+tais quais:
+
+\begin{definition}[Monomorfismo]
+    Uma função \(f : A \to B\) é um monomorfismo (ou \textit{monic}) se para
+    todos conjuntos \(Z\) e todas funções \(\alpha', \alpha'': Z \to A\), \(f
+    \circ \alpha' = f \circ \alpha'' \implies \alpha = \alpha''\) 
+\end{definition}
+
+\begin{prop}
+    Uma função é injetiva se só se é um monomorfismo.
+\end{prop}
+\begin{proof}
+    (\(\implies\)) Sabemos que uma função \(f: A \to B\), é injetiva então
+    possuí inversa à esquerda, i.e \(\exists g, g \circ f = id_A\). Assim, seja
+    \(\alpha'', \alpha'', Z \to A, f \circ \alpha' = f \circ \alpha''\). Da
+    hipótese e do resultado enunciado, tomando a composição dessa construção por
+    g, e a associatividade: 
+    \[(g \circ f) \circ \alpha' = (g \circ f) \circ \alpha''\]
+
+    Assim, \(id_A \circ \alpha' = id_A \circ \alpha'' \implies \alpha' =
+    \alpha''\). Assim, concluímos f é um monomorfismo.
+
+    Para a (\(\impliedby \)) partimos de uma \(f\) monomorfismo. Pela definição
+    podemos tomar \(Z = \{p\}\) para um dado \(p\), e \(\alpha', \alpha'' Z \to
+    A\). 
+    
+    Para toda temos que se \(\alpha'' = \alpha''\) então para qualquer escolha
+    de \(\alpha'(p), \alpha''(p)\), vale que \(f(\alpha') = f(\alpha'') \implies
+    \alpha' = \alpha''\). Pela contrapositiva, i.e \(\alpha' \neq \alpha''
+    \implies f(\alpha') \neq f(\alpha'')\). Assim, \(f\) deve ser injetiva. 
+\end{proof}
+
+\begin{exercise}
+    Formule a noção de epimorfismo de maneira análoga a de monomorfismo e
+    formule e demonstre um resultado análogo ao anterior.
+\end{exercise}
+
+\begin{example}
+    Sejam A e B dois conjuntos. Então temos as projeções naturais, \(\pi_A,
+    \pi_B\): 
+    \begin{center}
+    \begin{tikzcd}[column sep = small]
+          & A \times B \arrow[two heads]{dr}{\pi_B} \arrow[two
+          heads]{dl}[swap]{\pi_A} &  \\
+        A & & B    
+    \end{tikzcd}
+\end{center}
+    Definidas por \(\pi_A = ((a, b)) := a, \pi_B((a, b)) := b\), \(\forall (a,
+    b) \in A \times B\). Tais quais por definição são sobrejetores.
+\end{example}
+\begin{example}
+    Similarmente, existem funções injetoras naturais de A para B para a união
+    disjunta (denotada aqui por \(\amalg\)):
+    \begin{center}
+        \begin{tikzcd}[column sep = small]
+            A \arrow[hook]{dr} & & B \arrow[hook']{dl} \\
+            & A \amalg B &  
+        \end{tikzcd}
+    \end{center}
+
+    Obtida ao associar cada elemento de \(a, b \in A, B\) a seus respectivos
+    elementos de \(A + B\).
+\end{example}
+
+
+\begin{example}
+    Seja \(\sim \) uma relação de equivalência sobre um conjunto \(A\), então
+    existe uma projeção canônica, sobrejetora:
+    \begin{center}
+    \begin{tikzcd}
+        A \arrow[two heads]{r} & A/\sim 
+    \end{tikzcd}
+    \end{center}
+
+    Obtido ao associar todo \(a \in A\) a sua classe de equivalência
+    \([a]_\sim\).
+\end{example}
+
+Até agora foi dada uma clara enfâse aos mapas injetores e sobrejetores, isso
+ocorre pois elas conferem os "blocos" construtores necessários para qualquer
+função. Para observar este fato, basta observar que cada função \(f: A \to B\)
+determina uma relação de equivalência em A tal qual \(\forall \alpha', \alpha''
+\in A\),' 
+\[\alpha' \sim \alpha'' \iff f(\alpha') = f(\alpha'').\]
+\begin{prop}
+    Seja \(f: A \to B\) uma função, e \(\sim\) uma relação de equivalência.
+    Então f pode ser decomposta como:
+    \begin{tikzcd}
+        A \arrow[two heads]{r} \arrow[bend left]{rrr}{f} & (A/\sim)
+        \arrow{r}{\sim}[swap]{\tilde f} & \text{Im} f \arrow[hook]{r}  & B
+    \end{tikzcd}
+
+Onde a primeira função é a projeção canônica e a terceira a operação de inclusão
+e \(\tilde f\), bijeção é definida como \(\tilde f([a]_\sim) := f|(a)\)
+\end{prop}
+
+\subsection{Categorias}
+
+No contexto atual, vemos a necessidade de dar importância a como dois diferentes
+objetos podem se relacionar, como já dada a motivação por conjuntos. Assim, urge
+a ideia de pensar em categorias.
+
+\begin{definition}[Categorias]
+De forma direta, uma categoria \(\cat\) consiste em uma coleção (classe) de
+objetos \(\Obj \cat\) e morfismos entre eles, isto é para todo \(A, B \text{ de
+} \cat\), temos um conjunto \(\Hom_{\cat}(A, B)\) de morfismos com as seguintes
+propriedades:
+
+\begin{itemize}
+    \item Existência da identidade: Para todo objeto \(A\) de \(\cat\) existe ao
+    menos um morfismo \(1_A \in \Hom_{\cat}(A, A)\).
+    \item Composição de morfismos: Sejam \(f \in \Hom_{\cat} (A, B), g \in
+    \Hom_\cat(B, C)\) então \(gf \in \Hom_\cat(A, C)\). Ou seja para toda tripla
+    de objetos \(A, B, C, \exists\) h tal qual:
+    \[h: \Hom_\cat (A, B) \times \Hom_\cat (B, C) \to \Hom_\cat (A, C)\]
+    \item Composição é associativa, isto é, se \(f \in \Hom_\cat(A, B), g \in
+    \Hom_\cat(B, C), h \in Hom_\cat (C, D)\), então:
+    \[(hg)f = h(gf).\]
+    \item As identidade são identidades em relação a composição, isto é para
+    todo \(f \in \Hom_\cat (A, B)\)
+    \[f1_A = f = 1_B f\]
+    \item Se \(A \neq B, B \neq D\) então \(\Hom_\cat(A, B), \Hom_\cat(C, D)\)
+    são disjuntos;
+\end{itemize}
+\end{definition}
+
+Denominamos como \textit{endomorfismo} um morfismo de uma objeto \(A\) da
+categoria para sí mesmo, assim \(\Hom_\cat (A, A)\) é denotado por
+\(\text{End}_\cat(A)\). 
+
+\begin{example}
+    Denotaremos, aqui como \(\mathfrak{Set}\) a categoria de todos conjuntos,
+    assim: 
+    \begin{itemize}
+        \item \(\Obj(\mathfrak{Set} = )\) classe de todos conjuntos.
+        \item Para \(A, B \in \Obj(\mathfrak{Set})\), então
+        \(\Hom_{\mathfrak{Set}(A, B)} = B^A\)
+    \end{itemize}
+\end{example}
+\begin{example}
+    Considere a categoria \(\cat\) que abriga gerada a partir de \(\mathbb Z\)
+    munida da relação de equivalência \(\leq\), como o dado seguinte diagrama
+    \textit{comutativo}:
+
+    \begin{center}    
+    \begin{tikzcd}
+        2 \arrow{r} \arrow{dr} & 3 \arrow{r} \arrow{d}{1_3} & 5 \arrow{r} & 7 \\ 
+        & 3 \arrow{urr} \arrow{r} & 4 \arrow{ur}
+    \end{tikzcd}
+    \end{center}
+\end{example}
+\begin{example}[Slice Category]
+    Seja \(\cat\) uma categoria, e \(A\) um objeto de \(C\). Definimos a
+    categoria \(\cat_A\) com seus objetos sendo certos morfismos de \(\cat\) e
+    seus morfismos correspondentes, diagramas de \(\cat\), isto é:
+    \begin{itemize}
+        \item \(\Obj (\cat_A) =\) todos morfismos de qualquer outro objeto de
+        \(\cat\) para \(A\), i.e, qualquer objeto de \(\cat_A\) é um morfismo
+        \(f \in \Hom_\cat(Z, A)\) para algum \(Z\) de \(\cat\), em um diagrama:
+        \begin{center}
+            \begin{tikzcd}
+                Z \arrow{d}{f} \\
+                A
+            \end{tikzcd}
+        \end{center}
+        \item Os morfismos dessa categoria podem ser representador pelo seguinte
+        diagrama, onde \(f_1, f_2\) são objetos dela:
+        \begin{center}
+            \begin{tikzcd}
+                Z_1 \arrow{rr}{\sigma} \arrow{dr}[swap]{f_1} & & Z_2
+                \arrow{dl}{f_2} \\
+                & A & 
+            \end{tikzcd}
+        \end{center}
+
+        Tal qual \(\sigma\) representa o morfismo \(f_1 \to f_2\), com
+        \(\cat_A\) denominada a categoria ambiente de \(\cat\).
+    \end{itemize}
+\end{example}
+
+\begin{exercise}
+    Verifique que a categoria descrita anteriormente obedece os respectivos
+    axiomas.
+\end{exercise}
+\begin{example}
+    Seja \(\cat\) uma dada categoria, e \(A, B\) dois objetos da mesma. Podemos
+    definir uma categoria \(C_{A, B}\) da mesma maneira que definimos no último
+    exemplo, isto é:
+    \begin{itemize}
+        \item \(\Obj(\cat_{A, B})\) são os diagramas:
+        \begin{center}
+            \begin{tikzcd}
+                & A \\ Z \arrow{ur}{f} \arrow{dr}[swap]{g} \\ & B
+            \end{tikzcd}
+        \end{center}
+
+        Isto é, \(\Obj \cat_{A, B}\) são simplesmente as tuplas formadas tomando
+        para todo objeto Z de \(\cat\), \(f \in \Hom(Z, A), g \in \Hom(Z, B),
+        (f, g)\).
+        \item Seus morfismos podem ser representados pelos diagramas:
+        \begin{center}
+            \begin{tikzcd}
+                
+            & A & & & A \\
+            Z_1 \arrow{ur}{f_1} \arrow{dr}[swap]{g_1} & \arrow{rr} & & Z_2
+            \arrow{ur}{f_2} \arrow{dr}[swap]{g_2} \\
+            & B & & & B 
+        \end{tikzcd}
+        \end{center}
+        Que equivalem ao seguinte diagrama comutativo:
+        \begin{center}
+            \begin{tikzcd} 
+                & & A \\
+                Z_1 \arrow{r}{\sigma} \arrow[bend left]{urr}{f_1} \arrow[bend
+                right]{drr}[swap]{g_1} & Z_2 \arrow{ur}{f_2}
+                \arrow{dr}[swap]{g_2} \\
+                & & B
+            \end{tikzcd}
+        \end{center}
+        Formalmente podemos pensar nesses diagramas como a definição, tomando
+        dois objetos \(C, D\)de \(\cat_{A, B}\), com \(C, D\) sendo morfismos de
+        dado \(Z_1, Z_2\) para \(A, B\) de \(\cat\), com \(C = (f_1, g_1), D =
+        (f_2, g_2)\) tal qual \(Hom(C, D) = \sigma: Z_1 \to Z_2\) tal qual \(f_1
+        = f_2\sigma\) e \(g_1 = g_2 \sigma\) 
+    \end{itemize}
+\end{example}
+    \begin{example}
+        Trataremos aqui de \(\cat^{A, B}\). Seja \(\cat\) e fixe dois morfismos
+        \(\alpha: A \to C, \beta: B  \to C\) em \(\cat\). Então considere a
+        categoria determinada por:
+        \begin{itemize}
+            \item \(\Obj (\cat_{\alpha, \beta})\) os diagramas comutativos:
+            \begin{center}
+                \begin{tikzcd}
+                    & A \arrow{dr}{\alpha} & \\
+                    Z \arrow{ur}{f} \arrow{dr}[swap]{g} & & C \\
+                    & B \arrow{ur}[swap]{\beta}
+                \end{tikzcd}
+            \end{center}
+            \item Os morfismos determinados pelo seguinte diagrama:
+            \begin{center}
+                \begin{tikzcd}
+                    & & A \arrow{dr}{\alpha} \\
+                    Z_1 \arrow[bend left]{urr}{f_1} \arrow{r}{\sigma}
+                    \arrow[bend right]{drr}[swap]{g_1} & Z_2 \arrow{ur}{f_2}
+                    \arrow{dr}[swap]{g_2} & & C \\
+                    & & B \arrow{ur}[swap]{\beta}
+                \end{tikzcd}
+            \end{center}
+        \end{itemize}
+    \end{example}
+\begin{exercise}
+    Seja \(\cat\) uma categoria. Considere a estrutura \(\cat^{op}(A, B)\) com:
+    \begin{itemize}
+        \item \(\Obj(\cat^{op}) := \Obj(\cat)\);
+        \item Para \(A, B\) objetos de \(\cat^{op}\), \(\Hom_{\cat^{op}}(A, B)
+        := \Hom_\cat(B, A)\).
+    \end{itemize}
+
+
+    Mostre como formalizar essa estrutura em uma categoria, isto é defina a
+    composição de morfismos e verifique os axiomas necessários.
+\end{exercise}
+
+\begin{exercise}
+    Seja \(A\) um conjunto finito, então quão grande é
+    \(End_{\mathfrak{Set}}(A)\)? 
+\end{exercise}
+\begin{answer}
+    O conjunto de morfismos na categoria \(\mathfrak{Set}\) consiste em todas
+    funções \(f: S \to \tilde S\) com \(S, \tilde S\). Assim, podemos pensar em
+    no conjunto de endomorfismos de um dado \(A\) de cardinalidade finita, como
+    permutações para todos subconjuntos deles. Isto é, denotando M como esse
+    valor:
+    \begin{align*}
+        M = (|A|)^{|A|}
+    \end{align*} 
+    Tratando esse problema com um de contagem, onde basicamente cada elemento do
+    conjunto pode ser e para qualquer outro.
+\end{answer}
+\begin{exercise}
+    Seja \(V\) uma categoria com \(\Obj(V) = \mathbb N\), com \(\Hom(n, m)\) o
+    conjunto das matrizes \(m \times n\) com valores reais. 
+\end{exercise}
+
+\subsection{Morfismos}
+
+\begin{definition}[Isomorfismo]
+    Um morfismo \(f \in \Hom_\cat (A,B)\) é denominado isomorfismo se possuí uma
+    inversa por ambos lados, isto é \(\exists g \in \Hom_c(B, A)\) tal qual:
+    \[gf = 1_A, fg = 1_B\]
+\end{definition}
+\begin{prop}
+    A inversa de um isomorfismo é única.
+\end{prop}
+\begin{proof}
+    Queremos mostrar que se \(g_1, g_2: B \to A\) atuam como inversas de um
+    isomorfismo \(f: A \to B\) então \(g_1 = g_2\). Assim:
+    \[g_1 = g_1 1_B = g_1(fg_2) = (g_1f)g_2 = g_2\]
+\end{proof}
+\begin{prop}
+    As seguintes afirmações são verdadeiras:
+    \begin{itemize}
+        \item Toda identidade \(1_A\) é um isomorfismo e sua própria inversa.
+        \item Se f é um isomorfismo, então \(f^{-1}\) também é, tal qual
+        \((f^{-1})^{-1} = f\).
+        \item Se \(f \in \Hom_\cat (A, B), g \in \Hom_\cat (B, C)\) são
+        isomorfismos, então sua composta \(gf\) também é, de inversa
+        \(f^{-1}g^{-1}\).
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    Basta inspecionar as afirmações.
+\end{proof}
+\begin{example}[Grupóide]
+    De maneira lúdica, podemos pensar em um grupóide como uma categoria, tal
+    qual todos seus morfismos são iso.
+\end{example}
+
+Um automorfismo de um objeto \(A\) de uma categoria \(\cat\) é um iso de \(A \to
+A\), tal qual diretamente \(\text{Aut}_\cat (A) \subset \text{End}_\cat(A)\). É
+possível verificar de forma direta, que \(\text{Aut}_\cat(A)\) é fechado para
+composição, que por sua vez é associativa, além disso contém a identidade, e
+toda inversa. 
+
+Assim, para toda categoria e seus objetos, esse conjunto é grupo.
+
+Acima, tratamos da importante noção de isomorfismos, conforme já realizado
+anteriormente. 
+
+Partimos, agora, para a definição em termos categóricos de estruturas já
+trabalhadas anteriormente.
+\begin{definition}[Monomorfismo]
+    Seja \(\cat\) uma categoria. Um morfismo entre objetos \(A, B\) é um
+    monomorfismo se para todo objeto \(Z\) de \(\cat\) e todos morfismos
+    \(\alpha', \alpha''\) entre \(Z, A\):
+    \[f \circ \alpha' = f \circ \alpha'' \implies \alpha' = \alpha''\]
+\end{definition}
+
+\begin{definition}[Epimorfismo]
+    Seja \(\cat\) uma categoria. Um morfismo entre objetos \(A, B \) é dito
+    epimorfismo se para todo objeto Z e todos morfismos \(\beta', \beta''\)
+    entre \(B, Z\):
+    \[\beta' \circ f = \beta'' \circ f \implies \beta' = \beta''\]
+\end{definition}
+
+\subsection{Propriedades Universais}
+
+Até agora, o nosso estudo em categorias tratou de diversos casos específicos,
+entretanto, como categorias são objetos matemáticos extremamente gerais,
+naturalmente a idea de um tratamento mais universal se torna presente. Assim,
+iniciando com definições amplas:
+\begin{definition}[Objeto Inicial]
+    Seja \(\cat\) uma categoria. Dizemos que um objeto \(I\) de \(\cat\) é
+    inicial em \(\cat\) se para todo objeto \(A\) de \(C\) existe um único
+    morfismo \(I \to A\). i.e:
+    \[\forall A \in \Obj(\cat) : |\Hom_\cat(I, A)| = 1\]
+\end{definition}
+
+\begin{definition}
+    Dizemos que um objeto \(F\) de \(\cat\) é final se: 
+    \[\forall A \in \Obj (\cat): |\Hom_\cat(A, F)| = 1\]
+\end{definition}
+
+Se um objeto satisfaz qualquer uma dessas duas propriedades, dizemos que ele é
+um objeto terminal. 
+
+Essa definição extremamente simples, nós traz uma propriedade relativamente
+forte. Em linhas gerais, queremos mostrar que são únicos a menos de isomorfismo
+único, isto é, formulamos:
+\begin{prop}
+    Seja \(\cat\) uma categoria, então:
+    \begin{itemize}
+        \item Se \(I_1, I_2\) são objetos iniciais em \(\cat\), então \(I_1
+        \eqsim I_2\).
+        \item Se \(F_1, F_2\) são objetos finais em \(\cat\) então \(F_1 \eqsim
+        F_2\)
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    Sejam \(I_1, I_2\) dois objetos iniciais de \(\cat\) então, \(\exists! f:
+    I_1 \to I_2\), \(\exists! g: I_2 \to I_1\), além disso o único endomorfismo
+    de \(I_1, I_2\) é a identidade, por definição. Dessa forma \(fg = 1_{I_2}\)
+    e \(gf = 1_{I_1}\), assim \(f: I_1 \to I_2\) é um isomorfismo.
+
+    De mesma maneira, podemos concluir o mesmo fato para objetos finais.
+\end{proof}
+Objetos terminais desempenham um papel fundamental em certas propriedades
+universais. Os seguintes tópicos exibirão isso (em geral ligamos propriedades
+universais com objetos terminais).
+\subsubsection*{Quociente}
+    Seja \(\sim\) uma relação de equivalência em um conjunto \(A\). Queremos
+    entender a afirmação "O quociente \(A/\sim\) é universal em relação a
+    propriedade de mapear \(A\) para um conjunto de forma que elementos
+    equivalente possuem a mesma imagem, isto é:
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow{r}{\varphi} & Z 
+        \end{tikzcd}
+    \end{center}
+    
+    Para qualquer \(Z\) no qual:
+    \[a' \sim a'' \implies \varphi(a') = \varphi(a'')\] Definimos assim, a
+    categoria \(\cat'\) denotada por \((\varphi, Z)\), queremos saber se essa
+    categoria possuí objetos iniciais.
+
+    \begin{prop}
+        Seja \(\pi\) a projeção canônica, o par \(\pi, A/\sim\) é um objeto
+        inicial dessa categoria.
+    \end{prop}
+    \begin{proof}
+        Considere \(\varphi, Z\) definido acima. Queremos que o diagrama:
+        \begin{center}
+            \begin{tikzcd}
+                A/\sim \arrow{rr}{\overline \varphi} & &  Z \\
+                & A \arrow{ul}{\pi} \arrow{ur}{\varphi} & 
+            \end{tikzcd}
+        \end{center}
+        Seja único, i.e \(\exists! \overline \varphi\). Como estamos numa
+        categoria, o diagrama comuta tal qual:
+        \[\overline \varphi([a]_\sim) = \varphi(a)\] Ou seja, \(\overline \phi\)
+        é de fato única para todo \(Z\). 
+
+        Assim, por fim, é preciso que \(\overline \varphi\) seja bem definida.
+        De fato:
+        \[[a_1]_\sim = [a_2]_\sim \implies a_1 \sim a_2 \implies \phi(a_1) =
+        \phi(a_2)\]
+
+        Logo, como queríamos mostrar, esse objeto é inicial.
+    \end{proof}
+    \subsubsection*{Produto}
+    Partindo da ideia de produto de conjuntos, queremos obter um conceito mais
+    geral que possa ser observado em qualquer categoria. Com isso, temos a
+    seguinte ideia: O produto de dois conjuntos \(A, B\) (com suas respectivas
+    projeções naturais) é um objeto final na categoria \(\cat_{A, B}\). 
+    
+    Dizemos ainda que uma categoria \(\cat\) possuí produtos finitos se
+    \(\forall A, B \in \cat, \cat_{A, B}\) possuí objetos finais tal qual
+    existam dois morfismos \(A \times B \to A, A \times B \to B\)  
+
+    \begin{exercise}
+        Mostre que o produto cartesiano entre conjuntos \(A, B\) obedece essa
+        propriedade em \(\cat = \mathfrak{Set}\)
+    \end{exercise}
+
+\subsubsection*{Coprodutos}
+Intuitivamente pensamos pelo prefixo \textit{co-} que estes seriam o "inverso"
+do caso anterior, isto é, mais claramente:
+
+\begin{definition}[Coproduto]
+    Definimos como coproduto de dois objetos \(A, B\) de uma categoria \(\cat\),
+    os objetos iniciais da categoria \(\cat^{A, B}\), tal qual, no diagrama
+    abaixo, para o coproduto \(A \amalg B\) é um objeto de \(\cat\) munido de
+    \(\exists! \sigma: A \amalg B\)
+    \begin{center}
+    \begin{tikzcd}
+        A \arrow[bend left]{drr}{f_A} \arrow{dr}{i_A} \\
+        & A \amalg B \arrow{r}{\sigma} & Z \\ 
+        B \arrow{ur}{i_B} \arrow[bend right]{urr}{f_B}
+    \end{tikzcd}
+\end{center}
+\end{definition}
+\begin{prop}
+    A união disjunta em \(\mathfrak{Set}\) é um coproduto.
+\end{prop}
+\begin{proof}
+    Definimos a união disjunta de conjuntos \(A, B\) como a união de seus pares
+    isomorfos disjuntos, \(A', B'\). Assim, tomando \(A' = {0} \times A, B' =
+    {1} \times B\), com \(i_A(a) = i(0, a), i_B(b) = (1, b)\). Note que esse é
+    um caso específico, mas não precisamos tratar em geral, já que qualquer
+    outra união disjunta será isomorfa a essa definição.
+
+    Assim simplemente da definição, 
+    \begin{align*} 
+      \sigma(c) = \begin{cases}
+        f_A(a), \text{se } c &= (0, a) \in \{0\} \times A \\ 
+        f_B(b), text{se } c &= (1, b) \in \{1\} \times B 
+      \end{cases}  
+    \end{align*}
+    Tal qual a comutatividade e unicidade são diretas.
+\end{proof}
+\end{document}

@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{pbox}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{tikz-cd}
+\usetikzlibrary{cd}
+\usepackage[shortlabels]{enumitem}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+
+\hypersetup{ colorlinks=true, linkcolor=blue, filecolor=magenta,      
+    urlcolor=blue, pdftitle={Overleaf Example}, pdfpagemode=FullScreen, }
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{aff}{Afirmação}[section]
+\newtheorem{lemma}{Lema}[section]
+\theoremstyle{definition}
+\newtheorem{prop}{Proposição}[section]
+\newtheorem{definition}{Definição}[section]
+\newtheorem{exercise}{Exercício}[section]
+\theoremstyle{remark}
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{corol}{Corolário}[section]
+\newtheorem{observation}{Observação}[section]
+\newtheorem{answer}{Resposta}[section]
+\usepackage{subfiles} 
+
+\title{Algebra, Chapter 0: Anotações}
+\author{Pedro Saccomani}
+\date{Dezembro de 2022}
+
+\begin{document}
+\newcommand{\cat}{\mathfrak{C}} \newcommand{\Hom }{\text{Hom}}
+\newcommand{\Obj}{\text{Obj}}
+\newcommand{\modset}[1]{\mathbb Z/ #1\mathbb Z}
+\newcommand{\gcd}{\text{gcd}}
+
+
+\maketitle
+\section{Preliminares}
+\subfile{chapters/chapter1}
+\section{Primeiro encontro com Grupos}
+\subfile{chapters/chapter2.tex}
+\end{document}
